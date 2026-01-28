@@ -1,24 +1,8 @@
 'use client'
 
-export function WhyChooseSection() {
-  const features = [
-    {
-      title: 'Zero Fees & Fair Exchange Rates',
-      description: 'We keep our margins transparent and competitive no hidden costs, no inflated exchange rates. Compared to traditional banks, you could save up to 60% per transfer.',
-      icon: '💰'
-    },
-    {
-      title: 'Fast Delivery You Can Count On',
-      description: 'Whether you\'re supporting family or paying for services, your money gets there fast. Most transfers arrive within 1 to 3 business days, with real-time tracking included.',
-      icon: '⚡'
-    },
-    {
-      title: 'Fully Regulated',
-      description: 'Oro Remit is a registered company, fully compliant with local regulations. Your money is protected by rigorous security and compliance standards.',
-      icon: '✅'
-    }
-  ]
+import Image from 'next/image'
 
+export function WhyChooseSection() {
   return (
     <section id="why" className="py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Background Orb */}
@@ -37,17 +21,48 @@ export function WhyChooseSection() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
-            <div
-              key={index}
-              className="bg-card/50 border border-border rounded-2xl p-8 hover:border-accent transition-colors"
-            >
-              <div className="text-4xl mb-4">{feature.icon}</div>
-              <h3 className="text-2xl font-bold text-foreground mb-4">{feature.title}</h3>
-              <p className="text-muted-foreground leading-relaxed">{feature.description}</p>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          {/* Zero Fees - Full height on left */}
+          <div className="bg-card/50 border border-border rounded-2xl p-8 hover:border-accent transition-colors lg:row-span-2">
+            <h3 className="text-2xl font-bold text-foreground mb-4">Zero Fees & Fair Exchange Rates</h3>
+            <p className="text-muted-foreground leading-relaxed">
+              We keep our margins transparent and competitive no hidden costs, no inflated exchange rates. Compared to traditional banks, you could save up to 60% per transfer.
+            </p>
+          </div>
+
+          {/* Fast Delivery - Top right */}
+          <div className="bg-card/50 border border-border rounded-2xl p-8 hover:border-accent transition-colors flex flex-col">
+            <h3 className="text-2xl font-bold text-foreground mb-4">Fast Delivery You Can Count On</h3>
+            <p className="text-muted-foreground leading-relaxed mb-6 flex-grow">
+              Whether you're supporting family or paying for services, your money gets there fast. Most transfers arrive within 1 to 3 business days, with real-time tracking included.
+            </p>
+            <div className="flex justify-center">
+              <Image
+                src="/fastdelivery.png"
+                alt="Fast delivery illustration"
+                width={200}
+                height={200}
+                className="object-contain"
+              />
             </div>
-          ))}
+          </div>
+
+          {/* Fully Regulated - Bottom right */}
+          <div className="bg-card/50 border border-border rounded-2xl p-8 hover:border-accent transition-colors flex flex-col">
+            <h3 className="text-2xl font-bold text-foreground mb-4">Fully Regulated</h3>
+            <p className="text-muted-foreground leading-relaxed mb-6 flex-grow">
+              Oro Remit is a registered company, fully compliant with local regulations. Your money is protected by rigorous security and compliance standards.
+            </p>
+            <div className="flex justify-center">
+              <Image
+                src="/regulated.png"
+                alt="Regulated illustration"
+                width={180}
+                height={180}
+                className="object-contain"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </section>

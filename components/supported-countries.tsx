@@ -1,22 +1,24 @@
 'use client'
 
+import Image from 'next/image'
+
 export function SupportedCountries() {
   const countries = [
     {
       name: 'Philippines',
-      flag: '🇵🇭',
+      image: '/philippines.png',
       currency: 'PHP',
       description: 'Philippine Peso'
     },
     {
-      name: 'China',
-      flag: '🇨🇳',
-      currency: 'CNY',
-      description: 'Chinese Yuan'
+      name: 'Australia',
+      image: '/australia.png',
+      currency: 'AUD',
+      description: 'Australian Dollar'
     },
     {
       name: 'Pakistan',
-      flag: '🇵🇰',
+      image: '/pakistan.png',
       currency: 'PKR',
       description: 'Pakistani Rupee'
     }
@@ -40,7 +42,15 @@ export function SupportedCountries() {
               key={country.name}
               className="bg-card border border-border rounded-2xl p-8 text-center hover:border-accent transition-colors"
             >
-              <div className="text-6xl mb-4">{country.flag}</div>
+              <div className="flex justify-center mb-4">
+                <Image
+                  src={country.image || "/placeholder.svg"}
+                  alt={`${country.name} flag`}
+                  width={80}
+                  height={80}
+                  className="rounded-full"
+                />
+              </div>
               <h3 className="text-2xl font-bold text-foreground mb-2">{country.name}</h3>
               <p className="text-sm font-medium text-accent mb-4">{country.currency}</p>
               <p className="text-muted-foreground">{country.description}</p>
