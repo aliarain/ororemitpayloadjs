@@ -2,8 +2,19 @@
 
 import Image from 'next/image'
 
-export function SupportedCountries() {
-  const countries = [
+interface Country {
+  name: string
+  image?: any
+  currency: string
+  description: string
+}
+
+interface SupportedCountriesProps {
+  data?: Country[]
+}
+
+export function SupportedCountries({ data }: SupportedCountriesProps) {
+  const defaultCountries = [
     {
       name: 'Philippines',
       image: '/philippines.png',
@@ -24,6 +35,13 @@ export function SupportedCountries() {
     }
   ]
 
+  const countries = data && data.length > 0 
+    ? data.map(country => ({
+        ...country,
+        imageUrl: country.image?.url || '/placeholder.svg'
+      }))
+    : defaultCountries
+
   return (
     <section className="py-20 px-4 sm:px-6 lg:px-8 bg-background/50">
       <div className="max-w-7xl mx-auto">
@@ -37,14 +55,14 @@ export function SupportedCountries() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {countries.map((country) => (
+          {countries.map((country, index) => (
             <div
-              key={country.name}
+              key={country.name || index}
               className="bg-card border border-border rounded-2xl p-8 text-center hover:border-accent transition-colors"
             >
               <div className="flex justify-center mb-4">
                 <Image
-                  src={country.image || "/placeholder.svg"}
+                  src={(country as any).imageUrl || country.image || "/placeholder.svg"}
                   alt={`${country.name} flag`}
                   width={80}
                   height={80}

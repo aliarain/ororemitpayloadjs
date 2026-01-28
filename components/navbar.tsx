@@ -11,12 +11,14 @@ export function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold">
-              O
-            </div>
-            <span className="text-lg font-bold text-foreground hidden sm:inline">
-              Oro Remit
-            </span>
+            <Image 
+              src="/ororemit-logo.png" 
+              alt="Ororemit Logo" 
+              width={120} 
+              height={40}
+              className="h-8 w-auto"
+              priority
+            />
           </Link>
 
           {/* Navigation Links */}
@@ -33,7 +35,7 @@ export function Navbar() {
             <Link href="#terms" className="text-sm font-medium text-foreground hover:text-accent transition-colors">
               TERMS AND CONDITIONS
             </Link>
-            <Link href="#contact" className="text-sm font-medium text-foreground hover:text-accent transition-colors">
+            <Link href="/contact" className="text-sm font-medium text-foreground hover:text-accent transition-colors">
               CONTACT
             </Link>
           </div>

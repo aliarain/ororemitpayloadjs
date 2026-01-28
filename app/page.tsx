@@ -6,17 +6,34 @@ import { KeyFeatures } from '@/components/key-features'
 import { OpportunitiesSection } from '@/components/opportunities-section'
 import { FAQsSection } from '@/components/faqs-section'
 import { Footer } from '@/components/footer'
+import {
+  getHero,
+  getKeyFeatures,
+  getFAQs,
+  getWhyChoose,
+  getOpportunities,
+  getSupportedCountries,
+} from '@/lib/api'
 
-export default function Home() {
+export default async function Home() {
+  const [hero, keyFeatures, faqs, whyChoose, opportunities, countries] = await Promise.all([
+    getHero(),
+    getKeyFeatures(),
+    getFAQs(),
+    getWhyChoose(),
+    getOpportunities(),
+    getSupportedCountries(),
+  ])
+
   return (
     <main className="min-h-screen bg-background">
       <Navbar />
-      <HeroSection />
-      <SupportedCountries />
-      <WhyChooseSection />
-      <KeyFeatures />
-      <OpportunitiesSection />
-      <FAQsSection />
+      <HeroSection data={hero} />
+      <SupportedCountries data={countries} />
+      <WhyChooseSection data={whyChoose} />
+      <KeyFeatures data={keyFeatures} />
+      <OpportunitiesSection data={opportunities} />
+      <FAQsSection data={faqs} />
       <Footer />
     </main>
   )

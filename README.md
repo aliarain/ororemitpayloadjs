@@ -1,30 +1,125 @@
-# OroRemit website clone
+# OroRemit Website with Payload CMS
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+A modern, fully editable website for OroRemit built with Next.js 16 and Payload CMS.
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/aliarainpro/v0-ororemitpayloadjs)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/v0gMtr1nH7c)
+## Features
 
-## Overview
+- ✅ Fully editable content through Payload CMS admin panel
+- ✅ Contact form integrated with Payload CMS
+- ✅ All sections editable: Hero, Features, FAQs, Why Choose, Opportunities, Supported Countries
+- ✅ Modern, responsive design
+- ✅ TypeScript support
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+## Setup Instructions
+
+### 1. Install Dependencies
+
+```bash
+pnpm install
+```
+
+### 2. Environment Variables
+
+Create a `.env` file in the root directory:
+
+```env
+# Payload CMS
+PAYLOAD_SECRET=your-secret-key-here-change-in-production
+PAYLOAD_PUBLIC_SERVER_URL=http://localhost:3000
+
+# MongoDB
+DATABASE_URI=mongodb://localhost:27017/ororemit
+# Or use MongoDB Atlas:
+# DATABASE_URI=mongodb+srv://username:password@cluster.mongodb.net/ororemit
+```
+
+**Important:** Generate a secure random string for `PAYLOAD_SECRET`. You can use:
+```bash
+openssl rand -base64 32
+```
+
+### 3. Start MongoDB
+
+Make sure MongoDB is running locally, or use MongoDB Atlas for cloud hosting.
+
+### 4. Run Development Server
+
+```bash
+pnpm dev
+```
+
+The application will be available at:
+- **Website:** http://localhost:3000
+- **Payload Admin:** http://localhost:3000/admin
+
+### 5. Create Admin User
+
+On first visit to `/admin`, you'll be prompted to create an admin user account.
+
+## Payload CMS Collections
+
+The following collections are available for content management:
+
+- **Hero** - Main hero section content
+- **Key Features** - Features section with security and quick & easy content
+- **FAQs** - Frequently asked questions (orderable)
+- **Why Choose** - Why choose OroRemit section
+- **Opportunities** - Opportunities section content
+- **Supported Countries** - List of supported countries and currencies
+- **Contact Submissions** - Contact form submissions
+- **Media** - Image and file uploads
+- **Users** - Admin users
+
+## Project Structure
+
+```
+├── app/
+│   ├── api/
+│   │   ├── [...payload]/     # Payload API routes
+│   │   └── contact/           # Contact form API
+│   ├── admin/                 # Payload admin panel
+│   ├── contact/               # Contact page
+│   └── page.tsx               # Home page
+├── collections/               # Payload CMS collections
+├── components/                # React components
+└── lib/
+    ├── api.ts                 # API utilities for fetching Payload data
+    └── payload.ts             # Payload client
+```
+
+## Editing Content
+
+1. Navigate to `/admin` and log in
+2. Select the collection you want to edit (Hero, FAQs, etc.)
+3. Create or edit entries
+4. Changes will appear on the website immediately
+
+## Contact Form
+
+The contact form at `/contact` submits data to Payload CMS. All submissions are stored in the "Contact Submissions" collection and can be viewed in the admin panel.
 
 ## Deployment
 
-Your project is live at:
+### Environment Variables for Production
 
-**[https://vercel.com/aliarainpro/v0-ororemitpayloadjs](https://vercel.com/aliarainpro/v0-ororemitpayloadjs)**
+Make sure to set these environment variables in your hosting platform:
 
-## Build your app
+- `PAYLOAD_SECRET` - A secure random string
+- `PAYLOAD_PUBLIC_SERVER_URL` - Your production URL (e.g., https://yourdomain.com)
+- `DATABASE_URI` - Your MongoDB connection string
 
-Continue building your app on:
+### Build
 
-**[https://v0.app/chat/v0gMtr1nH7c](https://v0.app/chat/v0gMtr1nH7c)**
+```bash
+pnpm build
+pnpm start
+```
 
-## How It Works
+## Technologies Used
 
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+- Next.js 16 (App Router)
+- Payload CMS 3.x
+- MongoDB
+- TypeScript
+- Tailwind CSS
+- React Hook Form

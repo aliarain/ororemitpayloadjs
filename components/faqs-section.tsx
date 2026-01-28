@@ -7,8 +7,17 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion'
 
-export function FAQsSection() {
-  const faqs = [
+interface FAQ {
+  question: string
+  answer: string
+}
+
+interface FAQsSectionProps {
+  data?: FAQ[]
+}
+
+export function FAQsSection({ data }: FAQsSectionProps) {
+  const faqs = data && data.length > 0 ? data : [
     {
       question: 'Is Oro Remit a registered company?',
       answer: 'Yes. Oro Remit is a registered and fully compliant money transfer service.',

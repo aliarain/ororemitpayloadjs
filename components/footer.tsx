@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 
@@ -36,10 +37,13 @@ export function Footer() {
             {/* Brand Section */}
             <div>
               <div className="flex items-center gap-2 mb-4">
-                <div className="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-primary-foreground font-bold">
-                  O
-                </div>
-                <span className="text-lg font-bold text-foreground">Oro Remit</span>
+                <Image 
+                  src="/ororemit-logo.png" 
+                  alt="Ororemit Logo" 
+                  width={140} 
+                  height={46}
+                  className="h-10 w-auto"
+                />
               </div>
               <p className="text-muted-foreground">
                 Smart, Secure, and Cost-Effective Transfers for Everyone
