@@ -20,6 +20,11 @@ export const SupportedCountries: CollectionConfig = {
       relationTo: 'media',
     },
     {
+      name: 'imagePath',
+      type: 'text',
+      admin: { description: 'Fallback path from /public (e.g. /philippines.png) if no image uploaded.' },
+    },
+    {
       name: 'currency',
       type: 'text',
       required: true,

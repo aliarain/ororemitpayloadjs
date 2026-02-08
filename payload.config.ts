@@ -1,5 +1,6 @@
 import { buildConfig } from 'payload'
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { lexicalEditor } from '@payloadcms/richtext-lexical'
 import path from 'path'
 
@@ -36,6 +37,24 @@ const config = buildConfig({
   db: mongooseAdapter({
     url: process.env.DATABASE_URI || '',
   }),
+  email: nodemailerAdapter({
+    defaultFromAddress: process.env.EMAIL_FROM_ADDRESS || 'noreply@ororemit.com',
+    defaultFromName: process.env.EMAIL_FROM_NAME || 'Oro Remit',
+    // In development with no SMTP, emails are logged to console
+    ...(process.env.SMTP_HOST && {
+      transportOptions: {
+        host: process.env.SMTP_HOST,
+        port: Number(process.env.SMTP_PORT) || 587,
+        auth: process.env.SMTP_USER
+          ? { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS }
+          : undefined,
+      },
+    }),
+  }),
+  routes: {
+    admin: '/admin',
+    api: '/api',
+  },
   serverURL: process.env.PAYLOAD_PUBLIC_SERVER_URL || 'http://localhost:3000',
 })
 

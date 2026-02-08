@@ -120,13 +120,29 @@ The contact form at `/contact` submits data to Payload CMS. All submissions are 
 
 ## Deployment
 
-### Environment Variables for Production
+### Deploy to Vercel – Environment Variables
 
-Make sure to set these environment variables in your hosting platform:
+In **Vercel** → your project → **Settings** → **Environment Variables**, add these. Use **Production** (and optionally Preview) for each.
 
-- `PAYLOAD_SECRET` - A secure random string
-- `PAYLOAD_PUBLIC_SERVER_URL` - Your production URL (e.g., https://yourdomain.com)
-- `DATABASE_URI` - Your MongoDB connection string
+| Variable | Required | Value for production |
+|----------|----------|------------------------|
+| `PAYLOAD_SECRET` | **Yes** | A long random string (e.g. from `openssl rand -base64 32`). **Use a new value for production.** |
+| `PAYLOAD_PUBLIC_SERVER_URL` | **Yes** | Your live site URL, e.g. `https://your-app.vercel.app` or `https://ororemit.com`. **Must match the URL you use to open the site.** |
+| `DATABASE_URI` | **Yes** | Your MongoDB connection string (e.g. MongoDB Atlas). Must be reachable from Vercel (Atlas: allow access from anywhere or add Vercel IPs). |
+| `EMAIL_FROM_ADDRESS` | No | Sender email (e.g. `noreply@ororemit.com`). Defaults to `noreply@ororemit.com` if unset. |
+| `EMAIL_FROM_NAME` | No | Sender name (e.g. `Oro Remit`). Defaults to `Oro Remit` if unset. |
+| `SMTP_HOST` | No | SMTP server host (e.g. for Resend, SendGrid, or your provider). If unset, emails are not sent (password reset etc. will log to console). |
+| `SMTP_PORT` | No | Usually `587` (TLS) or `465` (SSL). |
+| `SMTP_USER` | No | SMTP username (if your provider uses auth). |
+| `SMTP_PASS` | No | SMTP password or API key. |
+
+**What to change from local:**
+
+1. **`PAYLOAD_PUBLIC_SERVER_URL`** – Set to your production URL, e.g. `https://ororemit.vercel.app` or your custom domain. Do not use `http://localhost:3000`.
+2. **`PAYLOAD_SECRET`** – Generate a new secret for production; do not reuse your local one.
+3. **`DATABASE_URI`** – Use a production MongoDB (e.g. Atlas). Ensure the cluster allows connections from the internet (or Vercel’s IPs if you restrict).
+
+After saving env vars, redeploy (or trigger a new deployment) so the build uses them.
 
 ### Build
 

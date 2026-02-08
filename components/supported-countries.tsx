@@ -38,7 +38,7 @@ export function SupportedCountries({ data }: SupportedCountriesProps) {
   const countries = data && data.length > 0 
     ? data.map(country => ({
         ...country,
-        imageUrl: country.image?.url || '/placeholder.svg'
+        imageUrl: country.image?.url || (country as any).imagePath || '/placeholder.svg'
       }))
     : defaultCountries
 

@@ -54,9 +54,9 @@ export default function ContactPage() {
         subject: '',
         message: '',
       })
-    } catch (error: any) {
+    } catch (error: unknown) {
       setSubmitStatus('error')
-      setErrorMessage(error.message || 'Something went wrong. Please try again.')
+      setErrorMessage(error instanceof Error ? error.message : 'Something went wrong. Please try again.')
     } finally {
       setIsSubmitting(false)
     }
@@ -66,7 +66,6 @@ export default function ContactPage() {
     <main className="min-h-screen bg-background">
       <Navbar />
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
-        {/* Background Gradient Orbs */}
         <div className="absolute right-0 top-0 w-96 h-96 bg-gradient-to-br from-primary/10 to-transparent rounded-full blur-3xl pointer-events-none" />
         <div className="absolute left-0 bottom-0 w-96 h-96 bg-gradient-to-tr from-muted/10 to-transparent rounded-full blur-3xl pointer-events-none" />
 
