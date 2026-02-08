@@ -17,6 +17,12 @@ import { Users } from './collections/Users'
 const config = buildConfig({
   admin: {
     user: Users.slug,
+    components: {
+      graphics: {
+        Logo: '/components/admin/AdminLogo',
+        Icon: '/components/admin/AdminIcon',
+      },
+    },
   },
   collections: [
     Users,
