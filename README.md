@@ -38,9 +38,29 @@ DATABASE_URI=mongodb://localhost:27017/ororemit
 openssl rand -base64 32
 ```
 
-### 3. Start MongoDB
+### 3. Database (required)
 
-Make sure MongoDB is running locally, or use MongoDB Atlas for cloud hosting.
+The app uses **MongoDB** via `@payloadcms/db-mongodb` (already installed). You need a MongoDB instance and `DATABASE_URI` in your `.env`.
+
+**Option A – Local MongoDB**
+
+1. Install MongoDB: [https://www.mongodb.com/try/download/community](https://www.mongodb.com/try/download/community) (or `brew install mongodb-community` on macOS).
+2. Start MongoDB (e.g. `brew services start mongodb-community` or run `mongod`).
+3. In `.env` set:
+   ```env
+   DATABASE_URI=mongodb://localhost:27017/ororemit
+   ```
+
+**Option B – MongoDB Atlas (cloud, no local install)**
+
+1. Create a free cluster at [https://www.mongodb.com/cloud/atlas](https://www.mongodb.com/cloud/atlas).
+2. Create a database user and get the connection string.
+3. In Atlas: Network Access → Add your IP (or `0.0.0.0` for dev).
+4. In `.env` set:
+   ```env
+   DATABASE_URI=mongodb+srv://USER:PASSWORD@cluster.xxxxx.mongodb.net/ororemit?retryWrites=true&w=majority
+   ```
+   (Replace `USER`, `PASSWORD`, and cluster host with your values.)
 
 ### 4. Run Development Server
 
